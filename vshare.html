@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Univall V Share</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#03090F;color:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:20px}
+.card{width:100%;max-width:380px;text-align:center;background:#0A141F;border:1px solid #1B3046;border-radius:24px;padding:36px 24px}
+.logo{font-size:30px;font-weight:800;letter-spacing:3px}.tag{color:#2FD3E0;font-style:italic;font-size:13px;margin-top:4px}
+.play{width:84px;height:84px;margin:28px auto 20px;border-radius:50%;background:#03090F;border:3px solid #2FD3E0;display:flex;align-items:center;justify-content:center}
+.play:after{content:"";border-left:26px solid #fff;border-top:16px solid transparent;border-bottom:16px solid transparent;margin-left:8px}
+h1{font-size:19px;margin:0 0 8px}p{color:#8DA2B5;font-size:14px;line-height:1.5;margin:0 0 24px}
+a.btn{display:block;padding:14px;border-radius:14px;font-weight:700;text-decoration:none;margin-top:10px}
+.open{background:#2FD3E0;color:#03090F}.get{border:1.5px solid #F5A623;color:#F5A623}
+</style></head><body>
+<div class="card">
+  <div class="logo">UNIVALL</div><div class="tag">Feel Everything</div>
+  <div class="play"></div>
+  <h1>Someone shared a V Share with you</h1>
+  <p id="msg">Watch it on Univall. If you don't have the app yet, download it first and the video will play.</p>
+  <a class="btn open" id="open" href="#">Open in Univall</a>
+  <a class="btn get" id="get" href="#">Download Univall</a>
+</div>
+<script>
+var id=(new URLSearchParams(location.search).get('v')||'').replace(/[^A-Za-z0-9_-]/g,'');
+var pkg='com.madhuman.univall16A18M';
+var store='https://play.google.com/store/apps/details?id='+pkg;
+var intent='intent://vshare/'+id+'#Intent;scheme=univall;package='+pkg+';S.browser_fallback_url='+encodeURIComponent(store)+';end';
+document.getElementById('get').href=store;
+document.getElementById('open').href=intent;
+if(/android/i.test(navigator.userAgent)&&id){setTimeout(function(){location.replace(intent);},300);}
+else if(!/android/i.test(navigator.userAgent)){document.getElementById('open').style.display='none';
+document.getElementById('msg').textContent='Univall is available on Android. Download it and open this link again on your phone.';}
+</script></body></html>
